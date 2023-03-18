@@ -1,5 +1,5 @@
 Project is made with blazor webassembly.
-project was made with different css solutions and designs.
+it has different css solutions and designs.
 
 
 1) you can view products(cars) in the main page.
