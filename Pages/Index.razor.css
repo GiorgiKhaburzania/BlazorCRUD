@@ -1,0 +1,117 @@
+﻿.main-wrapper {
+    width: 100%;
+    padding-inline: calc((100vw - 1200px) / 2);
+    min-height: calc(100vh - 24rem);
+}
+
+.title-section {
+    background-image: url(images/imgs/main-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - 24rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    height: calc(100vh - 4rem);
+    padding-inline: 2rem;
+}
+
+.title-section::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    opacity: 0.2;
+}
+
+.title-section h1{
+    font-size: 5rem;
+    color: white;
+    z-index: 10;
+    text-shadow: 0 0 12px black;
+    font-family: var(--thick-font);
+    letter-spacing: 10px;
+    text-align: center;
+}
+
+.title-section h2{
+    font-size: 3rem;
+    color: white;
+    z-index: 10;
+    text-shadow: 0 0 10px black;
+    font-family: var(--thick-font);
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+.product-section {
+    background-color: var(--bg-green);
+    /*background-image: linear-gradient(var(--bg-green), var(--black));*/
+    padding-block: 5rem;
+}
+
+.product-section h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: white;
+    font-family: var(--curly-font);
+}
+
+.catalog-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+}
+
+.car-item{
+    background-color: var(--black);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.car-item:hover{
+    scale: 1.05;
+    box-shadow: 0 0 50px black;
+}
+
+.car-item img{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+}
+
+.car-item .content{
+    padding: 3rem 1.5rem;
+}
+
+.car-item h3{
+    font-size: 28px;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px var(--main-green);
+}
+
+.car-item p{
+    font-size: 18px;
+    color: var(--main-green);
+}
+
+@media(max-width: 1200px){
+    .product-section{
+        padding-inline: 2rem;
+    }
+}
+
+@media(max-width: 700px) {
+    .catalog-wrapper {
+        grid-template-columns: 1fr;
+    }
+}

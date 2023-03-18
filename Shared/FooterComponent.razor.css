@@ -1,0 +1,42 @@
+﻿footer{
+    height: 20rem;
+    background-color: var(--black);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding-inline:  calc((100vw - 1200px) / 2);
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-size: 18px;
+    color: var(--light-gray);
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    align-items: center;
+}
+
+.info a{
+    font-size: 20px;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    user-select: none;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.info a:hover{
+    background-color: var(--main-green);
+    scale: 1.15;
+    box-shadow: 0 0 20px var(--main-green);
+}

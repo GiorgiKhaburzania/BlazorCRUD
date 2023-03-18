@@ -1,0 +1,135 @@
+﻿.form-section{
+    /*background-color: var(--light-gray);*/
+    background-image: linear-gradient(var(--bg-green), var(--black));
+    padding: 5rem calc((100vw - 1200px) / 2);
+    min-height: calc(100vh - 24rem);
+}
+
+.form-section h1{
+    text-align: center;
+    color: var(--black);
+    text-shadow: 0 0 10px var(--main-green);
+    font-size: 36px;
+}
+
+.edit-form {
+    margin-block: 3rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin-inline: auto;
+    background-color: #ffffff80;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    gap: 1.5rem;
+}
+
+.edit-form button{
+    background-color: var(--black);
+    color: white;
+    font-size: 20px;
+    padding: 1rem 2rem;
+    max-width: 20rem;
+    width: 100%;
+    margin-inline: auto;
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 400ms;
+    
+}
+
+.edit-form button:hover{
+    box-shadow: 0 0 15px var(--bg-green);
+    background-color: var(--main-green);
+    scale: 1.05;
+    letter-spacing: 5px;
+}
+
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    width: 100%;
+}
+
+.input-wrapper label{
+    color: var(--black);
+}
+
+::deep input, ::deep textarea {
+    padding: .5rem 1rem;
+    border: solid 1px var(--dark-gray);
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--bg-green);
+    outline-color: var(--main-green);
+}
+
+::deep input.invalid, ::deep textarea.invalid{
+    border-color: red;
+    box-shadow: 0 0 5px red;
+}
+
+::deep input.valid, ::deep textarea.valid{
+    border-color: var(--main-green);
+    box-shadow: 0 0 5px var(--bg-green);
+}
+
+::deep textarea{
+    resize: none;
+}
+
+::deep .description{
+    min-height: 7rem;
+}
+
+::deep .validation-errors{
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    color: red;
+    font-size: 18px;
+}
+
+::deep .validation-message{
+    position: relative;
+    padding-left: 2rem;
+}
+
+::deep .validation-message::before{
+    content: "!";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0% -50%;
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+.row{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.price{
+    width: 7rem;
+}
+
+@media(max-width: 700px){
+    .edit-form{
+        width: calc(100% - 3rem);
+    }
+
+    .row{
+        flex-direction: column;
+    }
+
+    .row > * {
+        width: 100%;
+    }
+}

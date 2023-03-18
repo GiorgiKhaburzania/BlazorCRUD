@@ -1,0 +1,83 @@
+﻿@inject ICarService _carService;
+@inject NavigationManager _nav;
+
+<div class="popup">
+    <div class="backdrop" @onclick="CloseClick"></div>
+    <div class="car-details-popup">
+        <img class="main-img" src="@car.ImageSrc" alt="@car.Name" />
+        <h2 class="title">@car.Name</h2>
+        <p class="short-desc">@car.ShortDescription</p>
+        <p class="desc">@car.Description</p>
+        <div class="actions">
+            <h3>$@car.Price.ToString("N0")</h3>
+            <button class="cart-add edit" @onclick="CartClick">
+                <p>@(isInCart ? "Remove From Cart" : "Add To Cart")</p>
+                <img src="images/imgs/cart.png" alt="Cart" />
+            </button>
+            <div class="action-btns">
+                <button class="edit" @onclick="OnCarEdit">Edit</button>
+                <button class="delete" @onclick="OnCarDelete">Delete</button>
+            </div>
+        </div>
+        <button class="close" @onclick="CloseClick">X</button>
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    public bool isInCart { get; set; }
+
+    public Car car { get; set; }
+
+    protected override void OnInitialized()
+    {
+        car = _carService.GetCarById(id)!;
+        isInCart = _carService.Cart.Any(x => x.Id == id);
+    }
+
+    protected void CloseClick()
+    {
+        OnClose.InvokeAsync(false);
+    }
+
+    public void OnCarEdit()
+    {
+        _nav.NavigateTo($"Edit/{id}");
+    }
+
+    public void OnCarDelete()
+    {
+        _carService.RemoveCar(id);
+        CloseClick();
+    }
+
+    public void CartAdd()
+    {
+        _carService.AddToCart(id);
+        isInCart = true;
+    }
+
+    public void CartRemove()
+    {
+        _carService.RemoveCar(id);
+        isInCart = false;
+    }
+
+    public void CartClick()
+    {
+        if (isInCart)
+        {
+            CartRemove();
+        }
+        else
+        {
+            CartAdd();
+        }
+    }
+}

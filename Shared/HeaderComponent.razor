@@ -1,0 +1,34 @@
+﻿@inject NavigationManager _nav;
+
+<header>
+    <div class="logo-div" @onclick="NavigateToHome">
+        <img src="images/imgs/alta-logo.webp" alt="Alta Logo" />
+    </div>
+    <div @onclick="toggleNav" class="outer-butger">
+        <div class="@(navState ? "active burger" : "burger")"></div>
+    </div>
+    <ul class="@(navState ? "show nav-ul" : "nav-ul")">
+        <li><NavLink ActiveClass="active-nav-link" @onclick="CloseNav" href="" Match="NavLinkMatch.All">Home</NavLink></li>
+        <li><NavLink ActiveClass="active-nav-link" @onclick="CloseNav" href="new">Add Product</NavLink></li>
+        <li><NavLink ActiveClass="active-nav-link" @onclick="CloseNav" href="cart">Cart</NavLink></li>
+    </ul>
+</header>
+
+@code {
+    public bool navState { get; set; }
+
+    public void NavigateToHome()
+    {
+        _nav.NavigateTo("");
+    }
+
+    public void CloseNav()
+    {
+        navState = false;
+    }
+
+    public void toggleNav()
+    {
+        navState = !navState;   
+    }
+}

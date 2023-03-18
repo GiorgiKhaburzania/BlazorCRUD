@@ -1,0 +1,53 @@
+﻿@inject ICarService _carService;
+
+@page "/cart";
+
+<section>
+    <div class="cart">
+        <div class="top-div">
+            <h1>My Cart</h1>
+            <p>Total Items <span>@_carService.Cart.Count</span></p>
+        </div>
+        <div class="items-wrapper">
+            @foreach(var item in _carService.Cart)
+            {
+                <div class="item">
+                    <img src="@item.ImageSrc" alt="@item.Name" />
+                    <div class="content">
+                        <h2>@item.Name</h2>
+                        <p>@item.ShortDescription</p>
+                        <h3>$@item.Price</h3>
+                        <button class="remove" @onclick="() => {OnRemove(item.Id);}">X</button>
+                    </div>
+                </div>
+            }
+            <h2 class="total-amount">Items Total Price <span>$@_carService.CartTotalPrice</span></h2>
+        </div>
+    </div>
+    <div class="total">
+        <h1>Sub Total</h1>
+        <p>price of items: $@_carService.CartTotalPrice</p>
+        <p>delivery: $@(Math.Floor(_carService.CartTotalPrice * 0.05))</p>
+        <h2>Total: $@(Math.Floor(_carService.CartTotalPrice + _carService.CartTotalPrice * 0.2))</h2>
+        <button @onclick="() => {showPayment = true;}">Checkout</button>
+    </div>
+</section>
+
+@if (showPayment)
+{
+    <PaymentCard OnClose="@onClose"></PaymentCard>
+}
+
+@code {
+    public bool showPayment { get; set; } = false;
+
+    public void OnRemove(int id)
+    {
+        _carService.RemoveFromCart(id);
+    }
+
+    public void onClose(bool value)
+    {
+        showPayment = value;
+    }
+}

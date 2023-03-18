@@ -1,0 +1,190 @@
+﻿.popup{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    isolation: isolate;
+}
+
+.backdrop{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #00000080;
+}
+
+.car-details-popup {
+    display: grid;
+    grid-template: "img title" 1fr
+        "img shortDesc" 1fr
+        "img desc" 3fr
+        "img actions" 1fr/ 2fr 3fr;
+    gap: 1.5rem;
+    z-index: 10;
+    max-width: 1200px;
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    animation: showPopup ease 1000ms;
+}
+
+@keyframes showPopup {
+    0% {translate: 0 -150%
+    }
+
+    100% {
+        translate: 0 0%
+    }
+}
+
+.car-details-popup .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--black);
+    color: white;
+    translate: 50% -50%;
+    font-size: 14px;
+    padding: .7rem 1rem;
+    border-radius: 500px;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.close:hover {
+    background: var(--red);
+}
+
+.actions{
+    grid-area: actions;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+}
+
+.actions h3{
+    margin-right: auto;
+    font-size: 28px;
+    color: var(--bg-green);
+}
+
+.actions button{
+    font-size: 18px;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.actions button:hover{
+    scale: 1.1;
+}
+
+.cart-add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+}
+
+.cart-add img{
+    filter: invert(100%);
+}
+
+.edit {
+    background-color: var(--main-green);
+}
+.edit:hover{
+    box-shadow: 0 0 15px var(--main-green);
+}
+
+.delete{
+    background-color: var(--black);
+}
+.delete:hover{
+    background-color: var(--red);
+    box-shadow: 0 0 15px var(--red);
+}
+
+.car-details-popup .main-img {
+    grid-area: img;
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 25px var(--dark-gray);
+}
+
+.title{
+    grid-area: title;
+    font-size: 28px;
+    color: var(--bg-green);
+    text-shadow: 0 0 10px white;
+}
+
+.short-desc{
+    grid-area: shortDesc;
+}
+
+.desc{
+    grid-area: desc;
+}
+
+.action-btns{
+    display: flex;
+    gap: 2rem;
+}
+
+@media(max-width: 1200px) {
+    .car-details-popup {
+        width: calc(100% - 3rem);
+        grid-template: "img title" auto
+                        "img shortDesc" auto
+                        "img desc" auto
+                        "actions actions" auto / 2fr 3fr;
+    }
+}
+
+@media(max-width: 700px){
+    .car-details-popup {
+        grid-template: "img" auto
+                        "title" auto
+                        "shortDesc" auto
+                        "price" auto
+                        "actions" auto / 1fr;
+    }
+
+    .main-img{
+        max-height: 15rem;
+    }
+
+    .actions{
+        flex-direction: column;
+    }
+
+    .cart-add{
+        width: 100%;
+    }
+
+    .action-btns{
+        width: 100%;
+    }
+
+    .edit{
+        width: 100%;
+    }
+    .delete{
+        width: 100%;
+    }
+
+    .desc{
+        display: none;
+    }
+}

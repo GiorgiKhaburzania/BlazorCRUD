@@ -1,0 +1,134 @@
+﻿@inject ICarService _carService;
+@inject NavigationManager _nav;
+
+@page "/new"
+@page "/Edit/{id:int}"
+
+<section class="form-section">
+    @if (car != null && id != null || id == null)
+    {
+        @if(car == null)
+        {
+            <h1>Add new car</h1>
+        }
+        else
+        {
+            <h1>Edit @car.Name</h1>
+        }
+
+
+        <EditForm OnValidSubmit="@OnSubmit" Model="@(car == null ? newCar : car)">
+            <div class="edit-form">
+                <div class="row">
+                    <div class="input-wrapper">
+                        <label>Name</label>
+                        @if (car == null)
+                        {
+                            <InputText @bind-Value=@newCar.Name />
+                        }else
+                        {
+                            <InputText @bind-Value=@car.Name />
+                        }
+                        
+                    </div>
+                    <div class="input-wrapper price">
+                        <label>Price ($)</label>
+                        @if (car == null)
+                        {
+                            <InputNumber @bind-Value=@newCar.Price />
+                        }
+                        else
+                        {
+                            <InputNumber @bind-Value=@car.Price />
+                        }
+                    </div>
+                </div>
+                
+                <div class="input-wrapper">
+                    <label>Image Url</label>
+                    @if (car == null)
+                    {
+                        <InputText @bind-Value=@newCar.ImageSrc />
+                    }
+                    else
+                    {
+                        <InputText @bind-Value=@car.ImageSrc />
+                    }
+                </div>
+                <div class="input-wrapper">
+                    <label>Short Description</label>
+                    @if (car == null)
+                    {
+                        <InputTextArea @bind-Value=@newCar.ShortDescription />
+                    }
+                    else
+                    {
+                        <InputTextArea @bind-Value=@car.ShortDescription />
+                    }
+                </div>
+                <div class="input-wrapper">
+                    <label>Description</label>
+                    @if (car == null)
+                    {
+                        <InputTextArea @bind-Value=@newCar.Description class="description" />
+                    }
+                    else
+                    {
+                        <InputTextArea @bind-Value=@car.Description class="description" />
+                    }
+                </div>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <button type="submit">Submit</button>
+            </div>
+        </EditForm>
+        
+    }
+    else
+    {
+        <h1>Car was not found!</h1>
+        <a href="" class="back-btn">Go to homepage</a>
+    }
+
+</section>
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    public Car? car { get; set; }
+    public Car newCar { get; set; } = new Car();
+
+    protected override void OnInitialized()
+    {
+        _nav.LocationChanged += RouteChange;
+        GetCar();
+    }
+
+    public async void RouteChange(object sender, LocationChangedEventArgs e)
+    {
+        await base.InvokeAsync(async () =>
+        {
+            GetCar();
+            StateHasChanged();
+        });
+    }
+
+    public void GetCar()
+    {
+        car = _carService.GetCarById(id);
+    }
+
+    public void OnSubmit()
+    {
+        if(id == null)
+        {
+            _carService.AddCar(newCar!);
+        }
+        else
+        {
+            _carService.EditCar(car!);
+        }
+        _nav.NavigateTo("");
+    }
+}

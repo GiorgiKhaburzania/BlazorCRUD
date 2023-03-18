@@ -1,0 +1,48 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+/*Roboto Condensed*/
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+/*Anton*/
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+/*Lobster*/
+
+:root {
+    --black: #0E0F13;
+    --main-green: #04BFAD;
+    --pale-green: #04BFAD80;
+    --bg-green: #027373;
+    --light-gray: #C1D4D9;
+    --dark-gray: #979DA6;
+    --red: #D11A2A;
+    --main-font: 'Roboto Condensed', sans-serif;
+    --thick-font: 'Anton', sans-serif;
+    --curly-font: 'Lobster', sans-serif;
+}
+
+html,body{
+    overflow-x: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+button{
+    border: none;
+    background-color: inherit;
+}
+
+h1,h2,h3,h4,h5,h6{
+    outline: none !important;
+}

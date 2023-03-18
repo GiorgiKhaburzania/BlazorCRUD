@@ -1,0 +1,49 @@
+﻿@inject ICarService _carService;
+@inject NavigationManager _nav;
+
+@page "/"
+<PageTitle>Home - Alta Car Shop</PageTitle>
+
+<section class="title-section">
+        <h1>Ready Set GO!</h1>
+        <h2>Alta Car Shop</h2>
+</section>
+
+<section class="product-section main-wrapper">
+        <h1>Our Catalog</h1>
+        <div class="catalog-wrapper">
+        @foreach(var car in _carService.Cars)
+        {
+            <div class="car-item" @onclick="() => OpenDetails(car.Id)">
+                <img src="@car.ImageSrc" alt="@car.Name" />
+                <div class="content">
+                    <h3>@car.Name</h3>
+                    <p>@car.ShortDescription</p>
+                </div>
+            </div>
+        }
+        </div>
+
+    @if (showDetails)
+    {
+        <CarDetails id="Id" OnClose="@handleClose"></CarDetails>
+    }
+    
+</section>
+
+@code{
+    public bool showDetails = false;
+    public int Id { get; set; }
+
+    public void OpenDetails(int id)
+    {
+        showDetails = true;
+        Id = id;
+    }
+
+    public void handleClose(bool value)
+    {
+        showDetails = value;
+    }
+
+}

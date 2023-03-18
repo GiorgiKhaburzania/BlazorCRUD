@@ -1,0 +1,70 @@
+﻿@using System.Text.Json;
+@inject IJSRuntime _js;
+
+<div class="popup">
+    <div class="backdrop" @onclick="CloseClick"></div>
+    <EditForm class="card-form" Model="Card" OnValidSubmit="OnSubmit">
+        <h3>Checkout</h3>
+        <div class="ckeckbox">
+            <div class="checkbox-item">
+                <input type="radio" name="option" id="option1" checked @onclick="() => Card.IsCredit = true" />
+                <label for="option1">
+                    <img src="images/imgs/credit-card.png" alt="Credit Card" />
+                    <span>Credit Card</span>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="radio" name="option" id="option2" @onclick="() => Card.IsCredit = false" />
+                <label for="option2">
+                    <img src="images/imgs/paypal.png" alt="Paypal" />
+                    <span>Paypal</span>
+                </label>
+            </div>
+        </div>
+        <div class="input-div">
+            <label>Card Number</label>
+            <InputText min="16" max="16" @bind-Value="Card.Number" />
+        </div>
+        <div class="input-div">
+            <label>Card Name</label>
+            <InputText @bind-Value="Card.Name" />
+        </div>
+        <div class="input-div">
+            <label>Expiration Date</label>
+            <InputDate @bind-Value="Card.Date" />
+        </div>
+        <div class="input-div">
+            <label>CVV</label>
+            <InputNumber TValue="int" @bind-Value="Card.Cvv" />
+        </div>
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <button type="submit" class="submit">Submit</button>
+
+        <button class="close" @onclick="CloseClick">X</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    public CreditCard Card = new CreditCard();
+
+    public void CloseClick()
+    {
+        OnClose.InvokeAsync(false);
+    }
+
+    public async Task OnSubmit(){
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
+
+        string jsonString = JsonSerializer.Serialize(Card, options);
+        await _js.InvokeVoidAsync("alert", jsonString);
+    }
+}
