@@ -46,3 +46,23 @@ button{
 h1,h2,h3,h4,h5,h6{
     outline: none !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--light-gray) !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--black);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-green);
+}
